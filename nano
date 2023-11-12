@@ -74,7 +74,7 @@ pull() {
 			;;
 
 		rootfs)
-			docker cp "$NANO_CONTAINER":/root/buildroot/output/images/rootfs.tar.xz product &&
+			docker cp "$NANO_CONTAINER":/root/buildroot/output/images/ out/ &&
 				echo Copied $1 to $_ directory.
 			;;
 	esac
