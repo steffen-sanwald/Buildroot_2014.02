@@ -1,3 +1,0 @@
-#!/bin/sh
-
-cd ~/buildroot && sed 's/http:\/\/rabbit.dereferenced.org\/~nenolod\/distfiles\//https:\/\/releases.pagure.org\/pkgconf\/pkgconf\//g' package/pkgconf/pkgconf.mk && make at91sam9260dfc_defconfig && make

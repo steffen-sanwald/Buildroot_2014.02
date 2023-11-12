@@ -17,6 +17,7 @@ RUN	wget -nv http://buildroot.uclibc.org/downloads/buildroot-2014.02.tar.bz2 &&\
 RUN sed -i 's/http:\/\/rabbit.dereferenced.org\/~nenolod\/distfiles\//https:\/\/releases.pagure.org\/pkgconf\/pkgconf\//g' buildroot/package/pkgconf/pkgconf.mk 
 RUN cd ~/buildroot && make at91sam9260dfc_defconfig 
 RUN cd ~/buildroot && make
+#COPY /root/buildroot/output/target
 # # Create rootfs overlay.
 # RUN mkdir -vpm775 buildroot/rootfs_overlay/srv
 
