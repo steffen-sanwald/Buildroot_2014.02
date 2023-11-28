@@ -14,21 +14,22 @@ RUN	wget -nv http://buildroot.uclibc.org/downloads/buildroot-2014.02.tar.bz2 &&\
 	ln -s buildroot-* buildroot &&\
 	mkdir -v buildroot/patches
 
+
+RUN mkdir /tmp/ssl && cd /tmp/ssl && wget http://ftp.oregonstate.edu/.1/blfs/conglomeration/openssl/openssl-1.0.1.tar.gz && tar xfz openssl-1.0.1.tar.gz 
+RUN cd /tmp/ssl/openssl-* && ./config --prefix=/usr --openssldir=/etc/ssl shared && make
+RUN apt-get -y remove openssl
+RUN cd /tmp/ssl/openssl-* && make install 
+
+
 RUN sed -i 's/http:\/\/rabbit.dereferenced.org\/~nenolod\/distfiles\//https:\/\/releases.pagure.org\/pkgconf\/pkgconf\//g' buildroot/package/pkgconf/pkgconf.mk 
-RUN cd ~/buildroot && make at91sam9260dfc_defconfig 
-RUN cd ~/buildroot && make
-#COPY /root/buildroot/output/target
-# # Create rootfs overlay.
-# RUN mkdir -vpm775 buildroot/rootfs_overlay/srv
+#BR2_KERNEL_MIRROR="https://mirrors.edge.kernel.org/pub"
+#BR2_KERNEL_MIRROR="http://ftp.iij.ad.jp/pub/linux/kernel"
 
-# # Install toolchain.
-# RUN	wget -nv --no-check-certificate \
-# 	https://github.com/Docker-nano/crosstool-NG/releases/download/1.0.1/x86_64-nano-linux-uclibc.tar.xz &&\
-# 	tar xf *.tar* &&\
-# 	ln -s "$(tar tf *.tar* | head -1)" toolchain &&\
-# 	rm *.tar*
 
-# COPY	in/buildroot		/usr/local/bin/
-# COPY	in/buildroot-configure	/usr/local/bin/
-# COPY	in/buildroot.conf	/root/buildroot/.config
-# COPY	in/post_build.sh	/root/buildroot/
+#RUN cd ~/buildroot && make at91sam9260dfc_defconfig 
+#RUN cd ~/buildroot && make
+
+# manual installation of openssl is needed for tls 1.2
+#make qemu_arm_versatile_defconfig
+#make linux-menuconfig
+#make uclibc-menuconfig
