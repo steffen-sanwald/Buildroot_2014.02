@@ -28,8 +28,11 @@ RUN sed -i 's/http:\/\/rabbit.dereferenced.org\/~nenolod\/distfiles\//https:\/\/
 
 #RUN cd ~/buildroot && make at91sam9260dfc_defconfig 
 #RUN cd ~/buildroot && make
-
 # manual installation of openssl is needed for tls 1.2
+
 #make qemu_arm_versatile_defconfig
 #make linux-menuconfig
 #make uclibc-menuconfig
+
+# docker cp 33a01f7bd8b4:/root/buildroot/output/build/uclibc-0.9.33.2/.config uclibc-0.9.33.2_menuconfig
+# docker cp 33a01f7bd8b4:/root/buildroot/output/build/linux-3.10.32/.config linux-3.10.32_menuconfig
