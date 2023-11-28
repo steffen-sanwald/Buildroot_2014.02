@@ -5,7 +5,7 @@ WORKDIR	/root
 
 # Install dependencies.
 RUN	apt-get update && DEBIAN_FRONTEND=noninteractive\
-	apt-get install -y build-essential libncurses5-dev rsync cpio python unzip bc wget lib32z1
+	apt-get install -y build-essential libncurses5-dev rsync cpio python unzip bc wget lib32z1 subversion
 
 # Install Buildroot.
 RUN	wget -nv http://buildroot.uclibc.org/downloads/buildroot-2014.02.tar.bz2 &&\
